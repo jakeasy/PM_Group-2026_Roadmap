@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEDIT 2025 Product Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #12151c;
+    --surface2: #1a1e28;
+    --border: #252a36;
+    --text: #e8eaf0;
+    --text-dim: #7a8299;
+    --text-muted: #4a5068;
+    --phase1: #3b82f6;
+    --phase1-glow: rgba(59,130,246,0.15);
+    --phase2: #10b981;
+    --phase2-glow: rgba(16,185,129,0.15);
+    --phase3: #f59e0b;
+    --phase3-glow: rgba(245,158,11,0.15);
+    --cat-scanner: #60a5fa;
+    --cat-app: #60a5fa;
+    --cat-platform: #a78bfa;
+    --cat-hardware: #fb923c;
+    --cat-clinical: #f472b6;
+    --cat-partner: #fbbf24;
+    --cat-ortho: #38bdf8;
+    --cat-sales: #e879f9;
+    --cat-ipadmac: #4ade80;
+    --cat-enterprise: #f97316;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .noise {
+    position: fixed; inset:0; z-index:0; pointer-events:none; opacity:0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  header {
+    position: relative;
+    padding: 48px 64px 32px;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(59,130,246,0.06) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  header::before {
+    content:'';
+    position:absolute; top:0; left:50%; transform:translateX(-50%);
+    width:600px; height:300px;
+    background: radial-gradient(ellipse, rgba(59,130,246,0.08), transparent 70%);
+    pointer-events:none;
+  }
+
+  .header-top {
+    display:flex; justify-content:space-between; align-items:flex-start;
+  }
+
+  .logo {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .logo span { color: var(--phase1); }
+
+  h1 {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 8px 0 6px;
+    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .today-badge {
+    display:inline-flex; align-items:center; gap:6px;
+    background: rgba(59,130,246,0.12);
+    border: 1px solid rgba(59,130,246,0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--phase1);
+    margin-top: 12px;
+  }
+
+  .today-badge .dot {
+    width:6px; height:6px; border-radius:50%;
+    background: var(--phase1);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(59,130,246,0.5); }
+    50% { opacity:0.7; box-shadow:0 0 0 4px rgba(59,130,246,0); }
+  }
+
+  .legend {
+    display:flex; gap:16px; flex-wrap:wrap; margin-top: 8px;
+  }
+
+  .legend-item {
+    display:flex; align-items:center; gap:6px;
+    font-size:12px; color: var(--text-dim);
+  }
+
+  .legend-dot {
+    width:10px; height:10px; border-radius:3px;
+  }
+
+  /* FILTERS */
+  .filters {
+    display:flex; gap:8px; padding: 20px 64px;
+    position:relative; z-index:2;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-dim);
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--text-dim);
+    color: var(--text);
+  }
+
+  .filter-btn.active {
+    background: var(--phase1);
+    border-color: var(--phase1);
+    color: #fff;
+  }
+
+  /* PHASE BARS */
+  .phases {
+    display:flex; gap:0; padding: 0 64px;
+    position:relative; z-index:1;
+    margin-top: 8px;
+  }
+
+  .phase-bar {
+    flex:1;
+    padding: 14px 20px;
+    border-radius: 10px;
+    display:flex; align-items:center; justify-content:space-between;
+    font-size: 14px;
+    font-weight: 600;
+    position:relative;
+    overflow:hidden;
+    margin: 0 4px;
+  }
+
+  .phase-bar::before {
+    content:''; position:absolute; inset:0; border-radius:10px;
+    opacity:0.12;
+  }
+
+  .phase-bar.p1 { background: var(--phase1-glow); border:1px solid rgba(59,130,246,0.25); color: var(--phase1); }
+  .phase-bar.p2 { background: var(--phase2-glow); border:1px solid rgba(16,185,129,0.25); color: var(--phase2); }
+  .phase-bar.p3 { background: var(--phase3-glow); border:1px solid rgba(245,158,11,0.25); color: var(--phase3); }
+
+  .phase-months {
+    font-size:12px; font-weight:400; opacity:0.7;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* TIMELINE */
+  .timeline-container {
+    padding: 32px 64px 64px;
+    position: relative;
+    z-index: 1;
+    overflow-x: auto;
+  }
+
+  .months-grid {
+    display:grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 0;
+    min-width: 1200px;
+    position:relative;
+  }
+
+  .month-col {
+    position:relative;
+    border-left: 1px solid var(--border);
+    min-height: 100px;
+    padding: 0 6px;
+  }
+
+  .month-col:last-child {
+    border-right: 1px solid var(--border);
+  }
+
+  .month-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 3;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .month-col.current .month-label {
+    color: var(--phase1);
+    background: linear-gradient(180deg, rgba(59,130,246,0.08) 0%, var(--bg) 100%);
+  }
+
+  .month-col.current {
+    background: linear-gradient(180deg, rgba(59,130,246,0.03) 0%, transparent 60%);
+  }
+
+  .month-items {
+    padding: 12px 4px;
+    display:flex; flex-direction:column; gap:8px;
+  }
+
+  /* CARDS */
+  .item-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    position:relative;
+    overflow:hidden;
+    animation: card-in 0.5s cubic-bezier(0.16,1,0.3,1) backwards;
+  }
+
+  .item-card::before {
+    content:'';
+    position:absolute; top:0; left:0; width:3px; height:100%;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .item-card[data-cat="scanner"]::before { background: var(--cat-scanner); }
+  .item-card[data-cat="apps"]::before { background: var(--cat-app); }
+  .item-card[data-cat="platform"]::before { background: var(--cat-platform); }
+  .item-card[data-cat="hardware"]::before { background: var(--cat-hardware); }
+  .item-card[data-cat="apps2"]::before { background: var(--cat-clinical); }
+  .item-card[data-cat="partner"]::before { background: var(--cat-partner); }
+  .item-card[data-cat="ortho"]::before { background: var(--cat-ortho); }
+  .item-card[data-cat="sales"]::before { background: var(--cat-sales); }
+  .item-card[data-cat="ipadmac"]::before { background: var(--cat-ipadmac); }
+  .item-card[data-cat="enterprise"]::before { background: var(--cat-enterprise); }
+
+  .item-card:hover {
+    transform: translateY(-2px);
+    border-color: #3a4058;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .item-card.monetized {
+    border-color: rgba(245,158,11,0.3);
+  }
+
+  .item-card.monetized::after {
+    content: '$';
+    position:absolute; top:8px; right:10px;
+    font-size:11px; font-weight:700;
+    color: var(--phase3);
+    background: rgba(245,158,11,0.12);
+    width:20px; height:20px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .card-date {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .card-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    padding-right: 20px;
+  }
+
+  .card-version {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-dim);
+    margin-top: 3px;
+  }
+
+  .card-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .card-tag {
+    display:inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-top: 6px;
+  }
+
+  .item-card[data-cat="scanner"] .card-tag { background:rgba(96,165,250,0.12); color:var(--cat-scanner); }
+  .item-card[data-cat="apps"] .card-tag { background:rgba(96,165,250,0.12); color:var(--cat-app); }
+  .item-card[data-cat="platform"] .card-tag { background:rgba(167,139,250,0.12); color:var(--cat-platform); }
+  .item-card[data-cat="hardware"] .card-tag { background:rgba(251,146,60,0.12); color:var(--cat-hardware); }
+  .item-card[data-cat="apps2"] .card-tag { background:rgba(244,114,182,0.12); color:var(--cat-clinical); }
+  .item-card[data-cat="partner"] .card-tag { background:rgba(251,191,36,0.12); color:var(--cat-partner); }
+  .item-card[data-cat="ortho"] .card-tag { background:rgba(56,189,248,0.12); color:var(--cat-ortho); }
+  .item-card[data-cat="sales"] .card-tag { background:rgba(232,121,249,0.12); color:var(--cat-sales); }
+  .item-card[data-cat="ipadmac"] .card-tag { background:rgba(74,222,128,0.12); color:var(--cat-ipadmac); }
+  .item-card[data-cat="enterprise"] .card-tag { background:rgba(249,115,22,0.12); color:var(--cat-enterprise); }
+
+  @keyframes card-in {
+    from { opacity:0; transform: translateY(12px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  /* TOOLTIP / MODAL */
+  .modal-overlay {
+    display:none;
+    position:fixed; inset:0; z-index:100;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    align-items:center; justify-content:center;
+    animation: fade-in 0.2s ease;
+  }
+
+  .modal-overlay.show { display:flex; }
+
+  .modal {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 480px;
+    width: 90%;
+    position:relative;
+    animation: modal-in 0.3s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .modal-close {
+    position:absolute; top:16px; right:16px;
+    background:none; border:none;
+    color: var(--text-dim); font-size:20px; cursor:pointer;
+    width:32px; height:32px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    transition: background 0.2s;
+  }
+
+  .modal-close:hover { background: var(--surface); }
+
+  .modal h3 {
+    font-size: 20px; font-weight:700; margin-bottom:4px;
+  }
+
+  .modal .modal-version {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; color: var(--text-dim);
+  }
+
+  .modal .modal-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  .modal .modal-desc {
+    font-size: 14px; color: var(--text-dim);
+    line-height: 1.6; margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .modal .modal-features {
+    margin-top:12px;
+    display: flex; flex-direction:column; gap:4px;
+  }
+
+  .modal .modal-features span {
+    font-size: 13px; color: var(--text-dim);
+    padding: 4px 0;
+  }
+
+  .modal .modal-features span::before {
+    content: '→ ';
+    color: var(--phase1);
+  }
+
+  @keyframes fade-in { from { opacity:0; } to { opacity:1; } }
+  @keyframes modal-in { from { opacity:0; transform:scale(0.95) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
+
+  /* STATS */
+  .stats-row {
+    display:flex; gap:12px; padding:0 64px; margin-top:16px;
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex:1;
+    min-width: 160px;
+  }
+
+  .stat-label {
+    font-size:12px; color:var(--text-muted);
+    text-transform:uppercase; letter-spacing:1px;
+    font-weight:500;
+  }
+
+  .stat-value {
+    font-size:28px; font-weight:700;
+    font-family:'JetBrains Mono', monospace;
+    margin-top:4px;
+  }
+
+  .stat-card:nth-child(1) .stat-value { color: var(--phase1); }
+  .stat-card:nth-child(2) .stat-value { color: var(--phase2); }
+  .stat-card:nth-child(3) .stat-value { color: var(--phase3); }
+  .stat-card:nth-child(4) .stat-value { color: var(--cat-app); }
+
+  .stat-card.clickable { cursor: pointer; transition: all 0.25s ease; }
+  .stat-card.clickable:hover { border-color: #3a4058; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  .stat-card.clickable.active { border-color: var(--phase1); box-shadow: 0 0 16px rgba(59,130,246,0.15); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    header, .filters, .phases, .timeline-container, .stats-row {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    h1 { font-size: 28px; }
+    .months-grid { min-width: 1800px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+
+<header>
+  <div class="header-top">
+    <div>
+      <div class="logo"><span>MEDIT</span> &mdash; PRODUCT ROADMAP</div>
+      <h1>2026 R&amp;D Release Timeline</h1>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <div class="subtitle">SW Monetization &rarr; Extend Apps &rarr; Extend B2B</div>
+        <div class="today-badge" style="margin-top:0;">
+          <div class="dot"></div>
+          Updated: 2026.03.26
+        </div>
+      </div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cat-app)"></div>Apps</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cat-platform)"></div>Platform</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cat-ipadmac)"></div>iPad/Mac</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cat-ortho)"></div>Ortho</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cat-enterprise)"></div>Enterprise</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cat-sales)"></div>Sales</div>
+    </div>
+  </div>
+</header>
+
+<div class="stats-row">
+  <div class="stat-card clickable" data-stat="all"><div class="stat-label">Total Releases</div><div class="stat-value" id="stat-total">0</div></div>
+  <div class="stat-card clickable" data-stat="meditlink"><div class="stat-label">Medit Link</div><div class="stat-value" id="stat-meditlink">0</div></div>
+  <div class="stat-card clickable" data-stat="monetized"><div class="stat-label">Monetized</div><div class="stat-value" id="stat-monetized">0</div></div>
+  <div class="stat-card clickable" data-stat="apps"><div class="stat-label">Medit Apps</div><div class="stat-value" id="stat-apps">0</div></div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="apps">Apps</button>
+  <button class="filter-btn" data-filter="platform">Platform</button>
+  <button class="filter-btn" data-filter="ipadmac">iPad/Mac</button>
+  <button class="filter-btn" data-filter="ortho">Ortho</button>
+  <button class="filter-btn" data-filter="enterprise">Enterprise</button>
+  <button class="filter-btn" data-filter="sales">Sales</button>
+</div>
+
+<div class="phases">
+  <div class="phase-bar p1">
+    <span>SW Monetization</span>
+    <span class="phase-months">MAR — JUN</span>
+  </div>
+  <div class="phase-bar p2">
+    <span>Extend Apps Monetization</span>
+    <span class="phase-months">JUN — SEP</span>
+  </div>
+  <div class="phase-bar p3">
+    <span>Extend B2B Monetization</span>
+    <span class="phase-months">OCT — DEC</span>
+  </div>
+</div>
+
+<div class="timeline-container">
+  <div class="months-grid" id="timeline">
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h3 id="modal-title"></h3>
+    <div class="modal-version" id="modal-version"></div>
+    <div class="modal-date" id="modal-date"></div>
+    <div class="modal-desc" id="modal-desc"></div>
+  </div>
+</div>
+
+<script>
+const months = ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+const items = [
+  // MARCH
+  { month:'Mar', date:'03/05', name:'CheckPoint', version:'V 1.1.0', cat:'apps', desc:'Enterprise 적용', subtitle:'Enterprise 적용', monetized:false },
+
+
+  { month:'Mar', date:'03/26', name:'MOS', version:'V 2.2.2', cat:'ortho', desc:'Management Console 업데이트', monetized:false },
+
+  // APRIL
+  { month:'Apr', date:'04/09', name:'Medit Link', version:'V 3.4.10', cat:'platform', desc:'i600 Unlock', subtitle:'i600 Unlock', monetized:true },
+  { month:'Apr', date:'04/09', name:'Express', version:'V 1.1.0', cat:'ipadmac', desc:'macOS 적용', subtitle:'macOS 적용', monetized:false },
+  { month:'May', date:'05/21', name:'ClinicCAD', version:'V 1.2.0', cat:'apps', desc:'CAD 소프트웨어 업데이트', monetized:false },
+  { month:'Apr', date:'04/28', name:'MOS', version:'V 2.2.3', cat:'ortho', desc:'Management Console 업데이트', monetized:false },
+  { month:'Apr', date:'04/30', name:'Express', version:'V 1.1.1', cat:'ipadmac', desc:'Mac Monetization', subtitle:'Mac Monetization', monetized:true },
+  { month:'Apr', date:'04/30', name:'eShop', version:'V 1.2.0', cat:'sales', desc:'온라인 스토어 업데이트', monetized:true },
+
+  // MAY
+  { month:'May', date:'05/14', name:'Smile Design for 3D', version:'V 2.0.0', cat:'apps', desc:'Cloud for Cx Suite', subtitle:'Cloud for Cx Suite', monetized:false },
+  { month:'May', date:'05/14', name:'AuraVue', version:'V 2.0.0', cat:'apps', desc:'US Only (Cloud)', subtitle:'US Only (Cloud)', monetized:true },
+
+  // JUNE
+  { month:'Jun', date:'06/09', name:'Medit Link', version:'V 3.14.11', cat:'platform', desc:'스캐너 펌웨어 업데이트', monetized:true },
+  { month:'Jun', date:'06/09', name:'Bundle Apps', version:'', cat:'apps', desc:'8 Apps Re-Release: Occlusion Analyzer, Smile Design, Ortho Simulation, Margin Lines, Crown Fit, Checkpoint, Design, DCM Converter', subtitle:'8 Apps Re-Release<br>• Occlusion Analyzer<br>• Smile Design<br>• Ortho Simulation<br>• Margin Lines<br>• Crown Fit<br>• Checkpoint<br>• Design<br>• DCM Converter', monetized:false },
+  { month:'Jun', date:'06/09', name:'Payment Apps', version:'', cat:'apps', desc:'4 Apps Re-Release (MOS/Model Builder/ClinicCAD/AuraVue)', subtitle:'4 Apps Re-Release<br>• MOS<br>• Model Builder<br>• ClinicCAD<br>• AuraVue', monetized:false },
+  { month:'Jun', date:'06/09', name:'eShop', version:'V 1.2.1', cat:'sales', desc:'온라인 스토어 업데이트', monetized:true },
+  { month:'Jun', date:'06/30', name:'Medit Link', version:'V 3.14.11', cat:'platform', desc:'스캐너 릴리즈', monetized:false },
+  { month:'Jun', date:'06/30', name:'Medit Link', version:'', cat:'platform', desc:'Bondent for Open API (China)', subtitle:'Bondent for Open API', subtitleChina:true, monetized:false },
+  { month:'Jun', date:'06/30', name:'MOS', version:'V 2.3.0', cat:'ortho', desc:'Management Console', subtitle:'US Only', monetized:false },
+
+  // SEPTEMBER
+  { month:'Sep', date:'09/17', name:'Medit Link', version:'V 3.5.0', cat:'platform', desc:'업데이트', monetized:false },
+  { month:'Sep', date:'09/29', name:'CX Suite', version:'V 1.0.0', cat:'apps',
+    desc:'5 New Apps Release: Smile Design for 3D, Face Scanning, Patient Monitoring, AI Smile Video Simulation, Risk Visualization',
+    subtitle:'5 New Apps Release',
+    monetized:false, features:['Smile Design for 3D','Face Scanning','Patient Monitoring','AI Smile Video Simulation','Risk Visualization'] },
+  { month:'Sep', date:'09/29', name:'Medit Link', version:'V 3.5.0', cat:'enterprise', desc:'업데이트', monetized:false },
+
+  // OCTOBER
+  { month:'Oct', date:'10/21', name:'Medit Link', version:'V 3.5.0', cat:'platform', desc:'업데이트', subtitle:'China', monetized:false },
+
+  // NOVEMBER
+
+  { month:'Nov', date:'11/02', name:'Medit Link', version:'V 3.5.1', cat:'platform', desc:'업데이트', monetized:false },
+
+  // DECEMBER
+  { month:'Dec', date:'12/02', name:'Medit Link', version:'V 3.5.1', cat:'enterprise', desc:'업데이트', monetized:false },
+  { month:'Dec', date:'12/15', name:'Medit Link', version:'V 3.5.1', cat:'enterprise', desc:'업데이트', subtitle:'China', monetized:false },
+];
+
+let activeFilters = new Set(['all']);
+
+function renderTimeline() {
+  const grid = document.getElementById('timeline');
+  grid.innerHTML = '';
+
+  months.forEach((m, mi) => {
+    const col = document.createElement('div');
+    col.className = 'month-col' + (m === 'Mar' ? ' current' : '');
+
+    const label = document.createElement('div');
+    label.className = 'month-label';
+    label.textContent = m;
+    col.appendChild(label);
+
+    const itemsDiv = document.createElement('div');
+    itemsDiv.className = 'month-items';
+
+    const monthItems = items.filter(it => it.month === m && (activeFilters.has('all') || activeFilters.has(it.cat)));
+
+    monthItems.forEach((it, idx) => {
+      const card = document.createElement('div');
+      card.className = 'item-card' + (it.monetized ? ' monetized' : '');
+      card.dataset.cat = it.cat;
+      card.style.animationDelay = (idx * 0.06) + 's';
+
+      card.innerHTML = `
+        <div class="card-date">${it.date}</div>
+        <div class="card-name">${it.name}</div>
+        ${it.subtitle ? `<div class="card-desc">${it.subtitle === 'China' ? '<span style="color:#ef4444;font-weight:600;">(China)</span>' : it.subtitle}${it.subtitleChina ? '<br><span style="color:#ef4444;font-weight:600;">(China)</span>' : ''}</div>` : ''}
+        ${it.version ? `<div class="card-version">${it.version}</div>` : ''}
+        <span class="card-tag">${it.cat === 'ipadmac' ? 'iPad/Mac' : it.cat}</span>
+      `;
+
+      card.addEventListener('click', () => openModal(it));
+      itemsDiv.appendChild(card);
+    });
+
+    col.appendChild(itemsDiv);
+    grid.appendChild(col);
+  });
+}
+
+function openModal(item) {
+  document.getElementById('modal-title').textContent = item.name;
+  document.getElementById('modal-version').textContent = item.version || '';
+  document.getElementById('modal-date').textContent = 'Release: ' + item.date;
+
+  let descHTML = '';
+  if (item.features) {
+    descHTML = '<div class="modal-features">' +
+      item.features.map(f => `<span>${f}</span>`).join('') +
+      '</div>';
+  } else {
+    descHTML = `<p>${item.desc}</p>`;
+  }
+  if (item.subtitle === 'China') {
+    descHTML += '<p style="margin-top:8px;color:#ef4444;font-weight:600;">(China)</p>';
+  }
+  if (item.monetized) {
+    descHTML += '<p style="margin-top:12px;color:var(--phase3);font-size:13px;font-weight:600;">$ Monetized Release</p>';
+  }
+  document.getElementById('modal-desc').innerHTML = descHTML;
+  document.getElementById('modal-overlay').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('show');
+}
+
+document.getElementById('modal-overlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+    if (filter === 'all') {
+      activeFilters.clear();
+      activeFilters.add('all');
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    } else {
+      activeFilters.delete('all');
+      document.querySelector('.filter-btn[data-filter="all"]').classList.remove('active');
+      if (activeFilters.has(filter)) {
+        activeFilters.delete(filter);
+        btn.classList.remove('active');
+        if (activeFilters.size === 0) {
+          activeFilters.add('all');
+          document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+        }
+      } else {
+        activeFilters.add(filter);
+        btn.classList.add('active');
+      }
+    }
+    renderWithStatFilter();
+  });
+});
+
+let activeStatFilter = null;
+
+const statFilterMap = {
+  'all': null,
+  'meditlink': it => it.cat === 'platform' || it.cat === 'enterprise' || it.cat === 'ipadmac',
+  'monetized': it => it.monetized,
+  'apps': it => it.cat === 'apps' || it.cat === 'ortho'
+};
+
+function updateStats() {
+  document.getElementById('stat-total').textContent = items.length;
+  document.getElementById('stat-meditlink').textContent = items.filter(it => it.cat === 'platform' || it.cat === 'enterprise' || it.cat === 'ipadmac').length;
+  document.getElementById('stat-monetized').textContent = items.filter(it => it.monetized).length;
+  document.getElementById('stat-apps').textContent = items.filter(it => it.cat === 'apps' || it.cat === 'ortho').length;
+}
+
+function renderWithStatFilter() {
+  const grid = document.getElementById('timeline');
+  grid.innerHTML = '';
+
+  months.forEach((m) => {
+    const col = document.createElement('div');
+    col.className = 'month-col' + (m === 'Mar' ? ' current' : '');
+
+    const label = document.createElement('div');
+    label.className = 'month-label';
+    label.textContent = m;
+    col.appendChild(label);
+
+    const itemsDiv = document.createElement('div');
+    itemsDiv.className = 'month-items';
+
+    let monthItems = items.filter(it => it.month === m);
+    if (activeFilters.has('all') === false) {
+      monthItems = monthItems.filter(it => activeFilters.has(it.cat));
+    }
+    if (activeStatFilter && statFilterMap[activeStatFilter]) {
+      monthItems = monthItems.filter(statFilterMap[activeStatFilter]);
+    }
+
+    monthItems.forEach((it, idx) => {
+      const card = document.createElement('div');
+      card.className = 'item-card' + (it.monetized ? ' monetized' : '');
+      card.dataset.cat = it.cat;
+      card.style.animationDelay = (idx * 0.06) + 's';
+
+      card.innerHTML = `
+        <div class="card-date">${it.date}</div>
+        <div class="card-name">${it.name}</div>
+        ${it.subtitle ? `<div class="card-desc">${it.subtitle === 'China' ? '<span style="color:#ef4444;font-weight:600;">(China)</span>' : it.subtitle}${it.subtitleChina ? '<br><span style="color:#ef4444;font-weight:600;">(China)</span>' : ''}</div>` : ''}
+        ${it.version ? `<div class="card-version">${it.version}</div>` : ''}
+        <span class="card-tag">${it.cat === 'ipadmac' ? 'iPad/Mac' : it.cat}</span>
+      `;
+
+      card.addEventListener('click', () => openModal(it));
+      itemsDiv.appendChild(card);
+    });
+
+    col.appendChild(itemsDiv);
+    grid.appendChild(col);
+  });
+}
+
+document.querySelectorAll('.stat-card.clickable').forEach(card => {
+  card.addEventListener('click', () => {
+    const stat = card.dataset.stat;
+    if (activeStatFilter === stat) {
+      activeStatFilter = null;
+      document.querySelectorAll('.stat-card.clickable').forEach(c => c.classList.remove('active'));
+    } else {
+      activeStatFilter = stat;
+      document.querySelectorAll('.stat-card.clickable').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    }
+    renderWithStatFilter();
+  });
+});
+
+renderWithStatFilter();
+updateStats();
+</script>
+
+<div style="position:fixed; bottom:16px; right:24px; font-size:11px; color:var(--text-muted); font-family:'JetBrains Mono',monospace; letter-spacing:0.5px; z-index:10;">
+  Created by Jake, PM Group, MEDIT
+</div>
+
+</body>
+</html>
