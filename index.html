@@ -7,29 +7,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0c10;
-    --surface: #12151c;
-    --surface2: #1a1e28;
-    --border: #252a36;
-    --text: #e8eaf0;
-    --text-dim: #7a8299;
-    --text-muted: #4a5068;
-    --phase1: #3b82f6;
-    --phase1-glow: rgba(59,130,246,0.15);
-    --phase2: #10b981;
-    --phase2-glow: rgba(16,185,129,0.15);
-    --phase3: #f59e0b;
-    --phase3-glow: rgba(245,158,11,0.15);
-    --cat-scanner: #60a5fa;
-    --cat-app: #60a5fa;
-    --cat-platform: #a78bfa;
-    --cat-hardware: #fb923c;
-    --cat-clinical: #f472b6;
-    --cat-partner: #fbbf24;
-    --cat-ortho: #38bdf8;
-    --cat-sales: #e879f9;
-    --cat-ipadmac: #4ade80;
-    --cat-enterprise: #f97316;
+    --bg: #f8f9fb;
+    --surface: #ffffff;
+    --surface2: #f1f3f7;
+    --border: #e2e5ec;
+    --text: #1a1d26;
+    --text-dim: #5a6178;
+    --text-muted: #8b92a8;
+    --phase1: #2563eb;
+    --phase1-glow: rgba(37,99,235,0.08);
+    --phase2: #059669;
+    --phase2-glow: rgba(5,150,105,0.08);
+    --phase3: #d97706;
+    --phase3-glow: rgba(217,119,6,0.08);
+    --cat-scanner: #3b82f6;
+    --cat-app: #2563eb;
+    --cat-platform: #7c3aed;
+    --cat-hardware: #ea580c;
+    --cat-clinical: #db2777;
+    --cat-partner: #ca8a04;
+    --cat-ortho: #0284c7;
+    --cat-sales: #c026d3;
+    --cat-ipadmac: #16a34a;
+    --cat-enterprise: #ea580c;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -43,7 +43,7 @@
   }
 
   .noise {
-    position: fixed; inset:0; z-index:0; pointer-events:none; opacity:0.03;
+    position: fixed; inset:0; z-index:0; pointer-events:none; opacity:0.015;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
@@ -51,7 +51,7 @@
     position: relative;
     padding: 48px 64px 32px;
     z-index: 1;
-    background: linear-gradient(180deg, rgba(59,130,246,0.06) 0%, transparent 100%);
+    background: linear-gradient(180deg, rgba(37,99,235,0.04) 0%, transparent 100%);
     border-bottom: 1px solid var(--border);
   }
 
@@ -59,7 +59,7 @@
     content:'';
     position:absolute; top:0; left:50%; transform:translateX(-50%);
     width:600px; height:300px;
-    background: radial-gradient(ellipse, rgba(59,130,246,0.08), transparent 70%);
+    background: radial-gradient(ellipse, rgba(37,99,235,0.05), transparent 70%);
     pointer-events:none;
   }
 
@@ -82,7 +82,7 @@
     font-weight: 800;
     letter-spacing: -1px;
     margin: 8px 0 6px;
-    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+    background: linear-gradient(135deg, #1a1d26 0%, #3a4058 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -95,8 +95,8 @@
 
   .today-badge {
     display:inline-flex; align-items:center; gap:6px;
-    background: rgba(59,130,246,0.12);
-    border: 1px solid rgba(59,130,246,0.3);
+    background: rgba(37,99,235,0.06);
+    border: 1px solid rgba(37,99,235,0.2);
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 13px;
@@ -150,7 +150,7 @@
   }
 
   .filter-btn:hover {
-    border-color: var(--text-dim);
+    border-color: #b0b7c8;
     color: var(--text);
   }
 
@@ -184,9 +184,9 @@
     opacity:0.12;
   }
 
-  .phase-bar.p1 { background: var(--phase1-glow); border:1px solid rgba(59,130,246,0.25); color: var(--phase1); }
-  .phase-bar.p2 { background: var(--phase2-glow); border:1px solid rgba(16,185,129,0.25); color: var(--phase2); }
-  .phase-bar.p3 { background: var(--phase3-glow); border:1px solid rgba(245,158,11,0.25); color: var(--phase3); }
+  .phase-bar.p1 { background: var(--phase1-glow); border:1px solid rgba(37,99,235,0.15); color: var(--phase1); }
+  .phase-bar.p2 { background: var(--phase2-glow); border:1px solid rgba(5,150,105,0.15); color: var(--phase2); }
+  .phase-bar.p3 { background: var(--phase3-glow); border:1px solid rgba(217,119,6,0.15); color: var(--phase3); }
 
   .phase-months {
     font-size:12px; font-weight:400; opacity:0.7;
@@ -237,11 +237,11 @@
 
   .month-col.current .month-label {
     color: var(--phase1);
-    background: linear-gradient(180deg, rgba(59,130,246,0.08) 0%, var(--bg) 100%);
+    background: linear-gradient(180deg, rgba(37,99,235,0.06) 0%, var(--bg) 100%);
   }
 
   .month-col.current {
-    background: linear-gradient(180deg, rgba(59,130,246,0.03) 0%, transparent 60%);
+    background: linear-gradient(180deg, rgba(37,99,235,0.03) 0%, transparent 60%);
   }
 
   .month-items {
@@ -281,12 +281,12 @@
 
   .item-card:hover {
     transform: translateY(-2px);
-    border-color: #3a4058;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border-color: #c5cad6;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   }
 
   .item-card.monetized {
-    border-color: rgba(245,158,11,0.3);
+    border-color: rgba(217,119,6,0.3);
   }
 
   .item-card.monetized::after {
@@ -340,15 +340,15 @@
   }
 
   .item-card[data-cat="scanner"] .card-tag { background:rgba(96,165,250,0.12); color:var(--cat-scanner); }
-  .item-card[data-cat="apps"] .card-tag { background:rgba(96,165,250,0.12); color:var(--cat-app); }
-  .item-card[data-cat="platform"] .card-tag { background:rgba(167,139,250,0.12); color:var(--cat-platform); }
+  .item-card[data-cat="apps"] .card-tag { background:rgba(37,99,235,0.08); color:var(--cat-app); }
+  .item-card[data-cat="platform"] .card-tag { background:rgba(124,58,237,0.08); color:var(--cat-platform); }
   .item-card[data-cat="hardware"] .card-tag { background:rgba(251,146,60,0.12); color:var(--cat-hardware); }
   .item-card[data-cat="apps2"] .card-tag { background:rgba(244,114,182,0.12); color:var(--cat-clinical); }
   .item-card[data-cat="partner"] .card-tag { background:rgba(251,191,36,0.12); color:var(--cat-partner); }
-  .item-card[data-cat="ortho"] .card-tag { background:rgba(56,189,248,0.12); color:var(--cat-ortho); }
-  .item-card[data-cat="sales"] .card-tag { background:rgba(232,121,249,0.12); color:var(--cat-sales); }
-  .item-card[data-cat="ipadmac"] .card-tag { background:rgba(74,222,128,0.12); color:var(--cat-ipadmac); }
-  .item-card[data-cat="enterprise"] .card-tag { background:rgba(249,115,22,0.12); color:var(--cat-enterprise); }
+  .item-card[data-cat="ortho"] .card-tag { background:rgba(2,132,199,0.08); color:var(--cat-ortho); }
+  .item-card[data-cat="sales"] .card-tag { background:rgba(192,38,211,0.08); color:var(--cat-sales); }
+  .item-card[data-cat="ipadmac"] .card-tag { background:rgba(22,163,74,0.08); color:var(--cat-ipadmac); }
+  .item-card[data-cat="enterprise"] .card-tag { background:rgba(234,88,12,0.08); color:var(--cat-enterprise); }
 
   @keyframes card-in {
     from { opacity:0; transform: translateY(12px); }
@@ -359,7 +359,7 @@
   .modal-overlay {
     display:none;
     position:fixed; inset:0; z-index:100;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.3);
     backdrop-filter: blur(8px);
     align-items:center; justify-content:center;
     animation: fade-in 0.2s ease;
@@ -462,8 +462,8 @@
   .stat-card:nth-child(4) .stat-value { color: var(--cat-app); }
 
   .stat-card.clickable { cursor: pointer; transition: all 0.25s ease; }
-  .stat-card.clickable:hover { border-color: #3a4058; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-  .stat-card.clickable.active { border-color: var(--phase1); box-shadow: 0 0 16px rgba(59,130,246,0.15); }
+  .stat-card.clickable:hover { border-color: #c5cad6; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .stat-card.clickable.active { border-color: var(--phase1); box-shadow: 0 0 16px rgba(37,99,235,0.1); }
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
@@ -563,10 +563,10 @@ const items = [
 
   // APRIL
   { month:'Apr', date:'04/09', name:'Medit Link', version:'V 3.4.10', cat:'platform', desc:'i600 Unlock', subtitle:'i600 Unlock', monetized:true },
-  { month:'Apr', date:'04/09', name:'Express', version:'V 1.1.0', cat:'ipadmac', desc:'macOS 적용', subtitle:'macOS 적용', monetized:false },
+  { month:'Apr', date:'04/09', name:'Express for iPad', version:'V 1.1.0', cat:'ipadmac', desc:'macOS 적용', subtitle:'macOS 적용', monetized:false },
   { month:'May', date:'05/21', name:'ClinicCAD', version:'V 1.2.0', cat:'apps', desc:'CAD 소프트웨어 업데이트', monetized:false },
   { month:'Apr', date:'04/28', name:'MOS', version:'V 2.2.3', cat:'ortho', desc:'Management Console 업데이트', monetized:false },
-  { month:'Apr', date:'04/30', name:'Express', version:'V 1.1.1', cat:'ipadmac', desc:'Mac Monetization', subtitle:'Mac Monetization', monetized:true },
+  { month:'Apr', date:'04/30', name:'Express for Mac', version:'V 1.1.1', cat:'ipadmac', desc:'Mac Monetization', subtitle:'Mac Monetization', monetized:true },
   { month:'Apr', date:'04/30', name:'eShop', version:'V 1.2.0', cat:'sales', desc:'온라인 스토어 업데이트', monetized:true },
 
   // MAY
@@ -581,6 +581,9 @@ const items = [
   { month:'Jun', date:'06/30', name:'Medit Link', version:'V 3.14.11', cat:'platform', desc:'스캐너 릴리즈', monetized:false },
   { month:'Jun', date:'06/30', name:'Medit Link', version:'', cat:'platform', desc:'Bondent for Open API (China)', subtitle:'Bondent for Open API', subtitleChina:true, monetized:false },
   { month:'Jun', date:'06/30', name:'MOS', version:'V 2.3.0', cat:'ortho', desc:'Management Console', subtitle:'US Only', monetized:false },
+
+  // JULY
+  { month:'Jul', date:'07/23', name:'Express for iPad', version:'V 1.1.1', cat:'ipadmac', desc:'Express for iPad', monetized:false },
 
   // SEPTEMBER
   { month:'Sep', date:'09/17', name:'Medit Link', version:'V 3.5.0', cat:'platform', desc:'업데이트', monetized:false },
