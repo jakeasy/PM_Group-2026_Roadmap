@@ -30,6 +30,7 @@
     --cat-sales: #c026d3;
     --cat-ipadmac: #16a34a;
     --cat-enterprise: #ea580c;
+    --cat-mobile: #0891b2;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -278,6 +279,7 @@
   .item-card[data-cat="sales"]::before { background: var(--cat-sales); }
   .item-card[data-cat="ipadmac"]::before { background: var(--cat-ipadmac); }
   .item-card[data-cat="enterprise"]::before { background: var(--cat-enterprise); }
+  .item-card[data-cat="mobile"]::before { background: var(--cat-mobile); }
 
   .item-card:hover {
     transform: translateY(-2px);
@@ -349,6 +351,7 @@
   .item-card[data-cat="sales"] .card-tag { background:rgba(192,38,211,0.08); color:var(--cat-sales); }
   .item-card[data-cat="ipadmac"] .card-tag { background:rgba(22,163,74,0.08); color:var(--cat-ipadmac); }
   .item-card[data-cat="enterprise"] .card-tag { background:rgba(234,88,12,0.08); color:var(--cat-enterprise); }
+  .item-card[data-cat="mobile"] .card-tag { background:rgba(8,145,178,0.08); color:var(--cat-mobile); }
 
   @keyframes card-in {
     from { opacity:0; transform: translateY(12px); }
@@ -491,6 +494,7 @@
           <div class="dot"></div>
           Updated: 2026.03.26
         </div>
+
       </div>
     </div>
     <div class="legend">
@@ -499,6 +503,7 @@
       <div class="legend-item"><div class="legend-dot" style="background:var(--cat-ipadmac)"></div>iPad/Mac</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--cat-ortho)"></div>Ortho</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--cat-enterprise)"></div>Enterprise</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--cat-mobile)"></div>Mobile</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--cat-sales)"></div>Sales</div>
     </div>
   </div>
@@ -518,6 +523,7 @@
   <button class="filter-btn" data-filter="ipadmac">iPad/Mac</button>
   <button class="filter-btn" data-filter="ortho">Ortho</button>
   <button class="filter-btn" data-filter="enterprise">Enterprise</button>
+  <button class="filter-btn" data-filter="mobile">Mobile</button>
   <button class="filter-btn" data-filter="sales">Sales</button>
 </div>
 
@@ -552,6 +558,105 @@
 </div>
 
 <script>
+let currentLang = 'en';
+
+const i18n = {
+  en: {
+    logo: 'PRODUCT ROADMAP',
+    title: '2026 R&D Release Timeline',
+    subtitle: 'SW Monetization → Extend Apps → Extend B2B',
+    updated: 'Updated: 2026.03.26',
+    totalReleases: 'Total Releases',
+    meditLink: 'Medit Link',
+    monetized: 'Monetized',
+    meditApps: 'Medit Apps',
+    release: 'Release',
+    monetizedRelease: '$ Monetized Release',
+    phase1: 'SW Monetization',
+    phase2: 'Extend Apps Monetization',
+    phase3: 'Extend B2B Monetization',
+    footer: 'Created by Jake, PM Group, MEDIT',
+    months: ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    legend: { apps:'Apps', platform:'Platform', 'ipadmac':'iPad/Mac', ortho:'Ortho', enterprise:'Enterprise', mobile:'Mobile', sales:'Sales' },
+  },
+  ko: {
+    logo: '제품 로드맵',
+    title: '2026 R&D 릴리즈 타임라인',
+    subtitle: 'SW 수익화 → 앱 확장 수익화 → B2B 확장 수익화',
+    updated: '업데이트: 2026.03.26',
+    totalReleases: '전체 릴리즈',
+    meditLink: 'Medit Link',
+    monetized: '수익화',
+    meditApps: 'Medit 앱',
+    release: '릴리즈',
+    monetizedRelease: '$ 수익화 릴리즈',
+    phase1: 'SW 수익화',
+    phase2: '앱 확장 수익화',
+    phase3: 'B2B 확장 수익화',
+    footer: 'Created by Jake, PM Group, MEDIT',
+    months: ['3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    legend: { apps:'앱', platform:'플랫폼', 'ipadmac':'iPad/Mac', ortho:'교정', enterprise:'엔터프라이즈', mobile:'모바일', sales:'영업' },
+  }
+};
+
+const itemTranslations = {
+  en: {
+    'CheckPoint': { subtitle:'Enterprise Integration' },
+    'MOS': { desc:'Management Console Update' },
+    'Medit Link': { desc:'Update' },
+    'Express for iPad': { subtitle:'macOS Integration', desc:'macOS Integration' },
+    'Express for Mac': { subtitle:'Mac Monetization', desc:'Mac Monetization' },
+    'eShop': { desc:'Online Store Update' },
+    'ClinicCAD': { desc:'CAD Software Update' },
+    'Smile Design for 3D': { subtitle:'Cloud for Cx Suite', desc:'Cloud for Cx Suite' },
+    'AuraVue': { subtitle:'US Only (Cloud)', desc:'US Only (Cloud)' },
+    'Bundle Apps': { subtitle:'8 Apps Re-Release<br>• Occlusion Analyzer<br>• Smile Design<br>• Ortho Simulation<br>• Margin Lines<br>• Crown Fit<br>• Checkpoint<br>• Design<br>• DCM Converter' },
+    'Payment Apps': { subtitle:'4 Apps Re-Release<br>• ClinicCAD V 1.2.0<br>• MOS<br>• Model Builder<br>• AuraVue' },
+    'Medit M': { desc:'Medit M Update' },
+    'CX Suite': { subtitle:'5 New Apps Release' },
+  },
+  ko: {
+    'CheckPoint': { subtitle:'엔터프라이즈 적용' },
+    'MOS': { desc:'관리 콘솔 업데이트' },
+    'Medit Link': { desc:'업데이트' },
+    'Express for iPad': { subtitle:'macOS 적용', desc:'macOS 적용' },
+    'Express for Mac': { subtitle:'Mac 수익화', desc:'Mac 수익화' },
+    'eShop': { desc:'온라인 스토어 업데이트' },
+    'ClinicCAD': { desc:'CAD 소프트웨어 업데이트' },
+    'Smile Design for 3D': { subtitle:'Cx Suite용 클라우드', desc:'Cx Suite용 클라우드' },
+    'AuraVue': { subtitle:'US Only (클라우드)', desc:'US Only (클라우드)' },
+    'Bundle Apps': { subtitle:'8개 앱 재출시<br>• Occlusion Analyzer<br>• Smile Design<br>• Ortho Simulation<br>• Margin Lines<br>• Crown Fit<br>• Checkpoint<br>• Design<br>• DCM Converter' },
+    'Payment Apps': { subtitle:'4개 앱 재출시<br>• MOS<br>• Model Builder<br>• ClinicCAD<br>• AuraVue' },
+    'Medit M': { desc:'Medit M 업데이트' },
+    'CX Suite': { subtitle:'5개 신규 앱 출시' },
+  }
+};
+
+const featureTranslations = {
+  en: {
+    'Glidewell RX Support': 'Glidewell RX Support',
+    'Monetization Subscription Available - My Subscription': 'Monetization Subscription Available - My Subscription',
+    'LAB-based functionality': 'LAB-based functionality',
+    'Real-time collaboration': 'Real-time collaboration',
+    'Smile Design for 3D': 'Smile Design for 3D',
+    'Face Scanning': 'Face Scanning',
+    'Patient Monitoring': 'Patient Monitoring',
+    'AI Smile Video Simulation': 'AI Smile Video Simulation',
+    'Risk Visualization': 'Risk Visualization',
+  },
+  ko: {
+    'Glidewell RX Support': 'Glidewell RX 지원',
+    'Monetization Subscription Available - My Subscription': '수익화 구독 가능 - 내 구독',
+    'LAB-based functionality': 'LAB 기반 기능',
+    'Real-time collaboration': '실시간 협업',
+    'Smile Design for 3D': '3D 스마일 디자인',
+    'Face Scanning': '얼굴 스캐닝',
+    'Patient Monitoring': '환자 모니터링',
+    'AI Smile Video Simulation': 'AI 스마일 영상 시뮬레이션',
+    'Risk Visualization': '리스크 시각화',
+  }
+};
+
 const months = ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 const items = [
@@ -564,7 +669,7 @@ const items = [
   // APRIL
   { month:'Apr', date:'04/09', name:'Medit Link', version:'V 3.4.10', cat:'platform', desc:'i600 Unlock', subtitle:'i600 Unlock', monetized:true },
   { month:'Apr', date:'04/09', name:'Express for iPad', version:'V 1.1.0', cat:'ipadmac', desc:'macOS 적용', subtitle:'macOS 적용', monetized:false },
-  { month:'May', date:'05/21', name:'ClinicCAD', version:'V 1.2.0', cat:'apps', desc:'CAD 소프트웨어 업데이트', monetized:false },
+
   { month:'Apr', date:'04/28', name:'MOS', version:'V 2.2.3', cat:'ortho', desc:'Management Console 업데이트', monetized:false },
   { month:'Apr', date:'04/30', name:'Express for Mac', version:'V 1.1.1', cat:'ipadmac', desc:'Mac Monetization', subtitle:'Mac Monetization', monetized:true },
   { month:'Apr', date:'04/30', name:'eShop', version:'V 1.2.0', cat:'sales', desc:'온라인 스토어 업데이트', monetized:true },
@@ -574,10 +679,11 @@ const items = [
   { month:'May', date:'05/14', name:'AuraVue', version:'V 2.0.0', cat:'apps', desc:'US Only (Cloud)', subtitle:'US Only (Cloud)', monetized:true },
 
   // JUNE
-  { month:'Jun', date:'06/09', name:'Medit Link', version:'V 3.14.11', cat:'platform', desc:'스캐너 펌웨어 업데이트', monetized:true },
+  { month:'Jun', date:'06/09', name:'Medit Link', version:'V 3.14.11', cat:'platform', desc:'Glidewell RX Support, Monetization Subscription Available - My Subscription', monetized:true, features:['Glidewell RX Support','Monetization Subscription Available - My Subscription'] },
   { month:'Jun', date:'06/09', name:'Bundle Apps', version:'', cat:'apps', desc:'8 Apps Re-Release: Occlusion Analyzer, Smile Design, Ortho Simulation, Margin Lines, Crown Fit, Checkpoint, Design, DCM Converter', subtitle:'8 Apps Re-Release<br>• Occlusion Analyzer<br>• Smile Design<br>• Ortho Simulation<br>• Margin Lines<br>• Crown Fit<br>• Checkpoint<br>• Design<br>• DCM Converter', monetized:false },
-  { month:'Jun', date:'06/09', name:'Payment Apps', version:'', cat:'apps', desc:'4 Apps Re-Release (MOS/Model Builder/ClinicCAD/AuraVue)', subtitle:'4 Apps Re-Release<br>• MOS<br>• Model Builder<br>• ClinicCAD<br>• AuraVue', monetized:false },
+  { month:'Jun', date:'06/09', name:'Payment Apps', version:'', cat:'apps', desc:'4 Apps Re-Release (MOS/Model Builder/ClinicCAD/AuraVue)', subtitle:'4 Apps Re-Release<br>• ClinicCAD V 1.2.0<br>• MOS<br>• Model Builder<br>• AuraVue', monetized:false },
   { month:'Jun', date:'06/09', name:'eShop', version:'V 1.2.1', cat:'sales', desc:'온라인 스토어 업데이트', monetized:true },
+  { month:'Jun', date:'06/11', name:'Medit M', version:'V 1.5.0', cat:'mobile', desc:'Medit M 업데이트', monetized:false },
   { month:'Jun', date:'06/30', name:'Medit Link', version:'V 3.14.11', cat:'platform', desc:'스캐너 릴리즈', monetized:false },
   { month:'Jun', date:'06/30', name:'Medit Link', version:'', cat:'platform', desc:'Bondent for Open API (China)', subtitle:'Bondent for Open API', subtitleChina:true, monetized:false },
   { month:'Jun', date:'06/30', name:'MOS', version:'V 2.3.0', cat:'ortho', desc:'Management Console', subtitle:'US Only', monetized:false },
@@ -591,6 +697,7 @@ const items = [
     desc:'5 New Apps Release: Smile Design for 3D, Face Scanning, Patient Monitoring, AI Smile Video Simulation, Risk Visualization',
     subtitle:'5 New Apps Release',
     monetized:false, features:['Smile Design for 3D','Face Scanning','Patient Monitoring','AI Smile Video Simulation','Risk Visualization'] },
+  { month:'Sep', date:'09/21', name:'Medit M', version:'V 2.0.0', cat:'mobile', desc:'LAB-based functionality, Real-time collaboration', monetized:false, features:['LAB-based functionality','Real-time collaboration'] },
   { month:'Sep', date:'09/29', name:'Medit Link', version:'V 3.5.0', cat:'enterprise', desc:'업데이트', monetized:false },
 
   // OCTOBER
@@ -617,7 +724,9 @@ function renderTimeline() {
 
     const label = document.createElement('div');
     label.className = 'month-label';
-    label.textContent = m;
+    const t = i18n[currentLang];
+    const mi2 = months.indexOf(m);
+    label.textContent = t.months[mi2];
     col.appendChild(label);
 
     const itemsDiv = document.createElement('div');
@@ -631,12 +740,16 @@ function renderTimeline() {
       card.dataset.cat = it.cat;
       card.style.animationDelay = (idx * 0.06) + 's';
 
+      const tr = itemTranslations[currentLang][it.name] || {};
+      const sub = tr.subtitle || it.subtitle;
+      const catLabel = t.legend[it.cat] || it.cat;
+
       card.innerHTML = `
         <div class="card-date">${it.date}</div>
         <div class="card-name">${it.name}</div>
-        ${it.subtitle ? `<div class="card-desc">${it.subtitle === 'China' ? '<span style="color:#ef4444;font-weight:600;">(China)</span>' : it.subtitle}${it.subtitleChina ? '<br><span style="color:#ef4444;font-weight:600;">(China)</span>' : ''}</div>` : ''}
+        ${sub ? `<div class="card-desc">${sub === 'China' ? '<span style="color:#ef4444;font-weight:600;">(China)</span>' : sub}${it.subtitleChina ? '<br><span style="color:#ef4444;font-weight:600;">(China)</span>' : ''}</div>` : ''}
         ${it.version ? `<div class="card-version">${it.version}</div>` : ''}
-        <span class="card-tag">${it.cat === 'ipadmac' ? 'iPad/Mac' : it.cat}</span>
+        <span class="card-tag">${catLabel}</span>
       `;
 
       card.addEventListener('click', () => openModal(it));
@@ -649,23 +762,26 @@ function renderTimeline() {
 }
 
 function openModal(item) {
+  const t = i18n[currentLang];
+  const tr = itemTranslations[currentLang][item.name] || {};
   document.getElementById('modal-title').textContent = item.name;
   document.getElementById('modal-version').textContent = item.version || '';
-  document.getElementById('modal-date').textContent = 'Release: ' + item.date;
+  document.getElementById('modal-date').textContent = t.release + ': ' + item.date;
 
   let descHTML = '';
   if (item.features) {
     descHTML = '<div class="modal-features">' +
-      item.features.map(f => `<span>${f}</span>`).join('') +
+      item.features.map(f => `<span>${featureTranslations[currentLang][f] || f}</span>`).join('') +
       '</div>';
   } else {
-    descHTML = `<p>${item.desc}</p>`;
+    const desc = tr.desc || item.desc;
+    descHTML = `<p>${desc}</p>`;
   }
-  if (item.subtitle === 'China') {
+  if (item.subtitle === 'China' || (tr && tr.subtitle === 'China')) {
     descHTML += '<p style="margin-top:8px;color:#ef4444;font-weight:600;">(China)</p>';
   }
   if (item.monetized) {
-    descHTML += '<p style="margin-top:12px;color:var(--phase3);font-size:13px;font-weight:600;">$ Monetized Release</p>';
+    descHTML += `<p style="margin-top:12px;color:var(--phase3);font-size:13px;font-weight:600;">${t.monetizedRelease}</p>`;
   }
   document.getElementById('modal-desc').innerHTML = descHTML;
   document.getElementById('modal-overlay').classList.add('show');
@@ -714,14 +830,14 @@ let activeStatFilter = null;
 
 const statFilterMap = {
   'all': null,
-  'meditlink': it => it.cat === 'platform' || it.cat === 'enterprise' || it.cat === 'ipadmac',
+  'meditlink': it => it.cat === 'platform' || it.cat === 'enterprise' || it.cat === 'ipadmac' || it.cat === 'mobile',
   'monetized': it => it.monetized,
   'apps': it => it.cat === 'apps' || it.cat === 'ortho'
 };
 
 function updateStats() {
   document.getElementById('stat-total').textContent = items.length;
-  document.getElementById('stat-meditlink').textContent = items.filter(it => it.cat === 'platform' || it.cat === 'enterprise' || it.cat === 'ipadmac').length;
+  document.getElementById('stat-meditlink').textContent = items.filter(it => it.cat === 'platform' || it.cat === 'enterprise' || it.cat === 'ipadmac' || it.cat === 'mobile').length;
   document.getElementById('stat-monetized').textContent = items.filter(it => it.monetized).length;
   document.getElementById('stat-apps').textContent = items.filter(it => it.cat === 'apps' || it.cat === 'ortho').length;
 }
@@ -729,6 +845,7 @@ function updateStats() {
 function renderWithStatFilter() {
   const grid = document.getElementById('timeline');
   grid.innerHTML = '';
+  const t = i18n[currentLang];
 
   months.forEach((m) => {
     const col = document.createElement('div');
@@ -736,7 +853,8 @@ function renderWithStatFilter() {
 
     const label = document.createElement('div');
     label.className = 'month-label';
-    label.textContent = m;
+    const mi2 = months.indexOf(m);
+    label.textContent = t.months[mi2];
     col.appendChild(label);
 
     const itemsDiv = document.createElement('div');
@@ -756,12 +874,16 @@ function renderWithStatFilter() {
       card.dataset.cat = it.cat;
       card.style.animationDelay = (idx * 0.06) + 's';
 
+      const tr = itemTranslations[currentLang][it.name] || {};
+      const sub = tr.subtitle || it.subtitle;
+      const catLabel = t.legend[it.cat] || it.cat;
+
       card.innerHTML = `
         <div class="card-date">${it.date}</div>
         <div class="card-name">${it.name}</div>
-        ${it.subtitle ? `<div class="card-desc">${it.subtitle === 'China' ? '<span style="color:#ef4444;font-weight:600;">(China)</span>' : it.subtitle}${it.subtitleChina ? '<br><span style="color:#ef4444;font-weight:600;">(China)</span>' : ''}</div>` : ''}
+        ${sub ? `<div class="card-desc">${sub === 'China' ? '<span style="color:#ef4444;font-weight:600;">(China)</span>' : sub}${it.subtitleChina ? '<br><span style="color:#ef4444;font-weight:600;">(China)</span>' : ''}</div>` : ''}
         ${it.version ? `<div class="card-version">${it.version}</div>` : ''}
-        <span class="card-tag">${it.cat === 'ipadmac' ? 'iPad/Mac' : it.cat}</span>
+        <span class="card-tag">${catLabel}</span>
       `;
 
       card.addEventListener('click', () => openModal(it));
@@ -787,6 +909,52 @@ document.querySelectorAll('.stat-card.clickable').forEach(card => {
     renderWithStatFilter();
   });
 });
+
+function updateLang() {
+  const t = i18n[currentLang];
+  document.querySelector('.logo').innerHTML = `<span>MEDIT</span> &mdash; ${t.logo}`;
+  document.querySelector('h1').textContent = t.title;
+  document.querySelector('.subtitle').textContent = t.subtitle;
+  document.querySelector('.today-badge').innerHTML = `<div class="dot"></div>${t.updated}`;
+
+  document.querySelectorAll('.stat-label').forEach((el, i) => {
+    const labels = [t.totalReleases, t.meditLink, t.monetized, t.meditApps];
+    el.textContent = labels[i];
+  });
+
+  document.querySelectorAll('.phase-bar span:first-child').forEach((el, i) => {
+    el.textContent = [t.phase1, t.phase2, t.phase3][i];
+  });
+
+  const legendKeys = ['apps','platform','ipadmac','ortho','enterprise','mobile','sales'];
+  document.querySelectorAll('.legend-item').forEach((el, i) => {
+    if (legendKeys[i]) {
+      const textNode = el.lastChild;
+      if (textNode) textNode.textContent = t.legend[legendKeys[i]];
+    }
+  });
+
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    const f = btn.dataset.filter;
+    if (f === 'all') btn.textContent = currentLang === 'ko' ? '전체' : 'All';
+    else if (t.legend[f]) btn.textContent = t.legend[f];
+  });
+
+  const footerEl = document.querySelector('[style*="Created by"]');
+  if (footerEl) footerEl.textContent = t.footer;
+
+  renderWithStatFilter();
+  updateStats();
+}
+
+const langSelect = document.getElementById('lang-select');
+if (langSelect) {
+  langSelect.addEventListener('change', (e) => {
+    currentLang = e.target.value;
+    updateLang();
+  });
+}
 
 renderWithStatFilter();
 updateStats();
