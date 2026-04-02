@@ -204,7 +204,7 @@
 
   .months-grid {
     display:grid;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(9, 1fr);
     gap: 0;
     min-width: 1200px;
     position:relative;
@@ -530,7 +530,7 @@
 <div class="phases">
   <div class="phase-bar p1">
     <span>SW Monetization</span>
-    <span class="phase-months">MAR — JUN</span>
+    <span class="phase-months">APR — JUN</span>
   </div>
   <div class="phase-bar p2">
     <span>Extend Apps Monetization</span>
@@ -576,7 +576,7 @@ const i18n = {
     phase2: 'Extend Apps Monetization',
     phase3: 'Extend B2B Monetization',
     footer: 'Created by Jake, PM Group, MEDIT',
-    months: ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    months: ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
     legend: { apps:'Apps', platform:'Platform', 'ipadmac':'iPad/Mac', ortho:'Ortho', enterprise:'Enterprise', mobile:'Mobile', sales:'Sales' },
   },
   ko: {
@@ -594,7 +594,7 @@ const i18n = {
     phase2: '앱 확장 수익화',
     phase3: 'B2B 확장 수익화',
     footer: 'Created by Jake, PM Group, MEDIT',
-    months: ['3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    months: ['4월','5월','6월','7월','8월','9월','10월','11월','12월'],
     legend: { apps:'앱', platform:'플랫폼', 'ipadmac':'iPad/Mac', ortho:'교정', enterprise:'엔터프라이즈', mobile:'모바일', sales:'영업' },
   }
 };
@@ -657,15 +657,9 @@ const featureTranslations = {
   }
 };
 
-const months = ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const months = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 const items = [
-  // MARCH
-  { month:'Mar', date:'03/05', name:'CheckPoint', version:'V 1.1.0', cat:'apps', desc:'Enterprise 적용', subtitle:'Enterprise 적용', monetized:false },
-
-
-  { month:'Mar', date:'03/26', name:'MOS', version:'V 2.2.2', cat:'ortho', desc:'Management Console 업데이트', monetized:false },
-
   // APRIL
   { month:'Apr', date:'04/09', name:'Medit Link', version:'V 3.4.10', cat:'platform', desc:'i600 Unlock', subtitle:'i600 Unlock', monetized:true },
   { month:'Apr', date:'04/09', name:'Express for iPad', version:'V 1.1.0', cat:'ipadmac', desc:'macOS 적용', subtitle:'macOS 적용', monetized:false },
@@ -679,20 +673,20 @@ const items = [
   { month:'May', date:'05/14', name:'AuraVue', version:'V 2.0.0', cat:'apps', desc:'US Only (Cloud)', subtitle:'US Only (Cloud)', monetized:true },
 
   // JUNE
-  { month:'Jun', date:'06/09', name:'Medit Link', version:'V 3.14.11', cat:'platform', desc:'Glidewell RX Support, Monetization Subscription Available - My Subscription', monetized:true, features:['Glidewell RX Support','Monetization Subscription Available - My Subscription'] },
-  { month:'Jun', date:'06/09', name:'Bundle Apps', version:'', cat:'apps', desc:'8 Apps Re-Release: Occlusion Analyzer, Smile Design, Ortho Simulation, Margin Lines, Crown Fit, Checkpoint, Design, DCM Converter', subtitle:'8 Apps Re-Release<br>• Occlusion Analyzer<br>• Smile Design<br>• Ortho Simulation<br>• Margin Lines<br>• Crown Fit<br>• Checkpoint<br>• Design<br>• DCM Converter', monetized:false },
-  { month:'Jun', date:'06/09', name:'Payment Apps', version:'', cat:'apps', desc:'4 Apps Re-Release (MOS/Model Builder/ClinicCAD/AuraVue)', subtitle:'4 Apps Re-Release<br>• ClinicCAD V 1.2.0<br>• MOS<br>• Model Builder<br>• AuraVue', monetized:false },
+  { month:'Jun', date:'06/09', name:'Medit Link', version:'V 3.14.11', cat:'platform', desc:'Glidewell RX 대응, 유료화 적용 - My Subscription 제공', monetized:true, features:['Glidewell RX 대응, 유료화 적용 - My Subscription 제공'] },
+  { month:'Jun', date:'06/09', name:'Bundle Apps', version:'', cat:'apps', desc:'기존 8개 앱을 Bundle Apps 유료화 적용을 위해 재출시', subtitle:'8 Apps Re-Release<br>• Occlusion Analyzer<br>• Smile Design<br>• Ortho Simulation<br>• Margin Lines<br>• Crown Fit<br>• Checkpoint<br>• Design<br>• DCM Converter', monetized:false, features:['기존 8개 앱을 Bundle Apps 유료화 적용을 위해 재출시'] },
+  { month:'Jun', date:'06/09', name:'Payment Apps', version:'', cat:'apps', desc:'ClinicCAD v 1.2.0 출시, MOS/Model Builder/AuraVue 유료화 재출시', subtitle:'4 Apps Re-Release<br>• ClinicCAD V 1.2.0<br>• MOS<br>• Model Builder<br>• AuraVue', monetized:false, features:['ClinicCAD v 1.2.0 출시','MOS, Model Builder, AuraVue는 유료화 적용을 위해 재출시'] },
   { month:'Jun', date:'06/09', name:'eShop', version:'V 1.2.1', cat:'sales', desc:'온라인 스토어 업데이트', monetized:true },
-  { month:'Jun', date:'06/11', name:'Medit M', version:'V 1.5.0', cat:'mobile', desc:'Medit M 업데이트', monetized:false },
+  { month:'Jun', date:'06/23', name:'Medit M', version:'V 1.5.0', cat:'mobile', desc:'담당자 보여주기, Get Help 지원', monetized:false, features:['담당자 보여주기','Get Help 지원'] },
   { month:'Jun', date:'06/30', name:'Medit Link', version:'V 3.14.11', cat:'platform', desc:'스캐너 릴리즈', monetized:false },
   { month:'Jun', date:'06/30', name:'Medit Link', version:'', cat:'platform', desc:'Bondent for Open API (China)', subtitle:'Bondent for Open API', subtitleChina:true, monetized:false },
-  { month:'Jun', date:'06/30', name:'MOS', version:'V 2.3.0', cat:'ortho', desc:'Management Console', subtitle:'US Only', monetized:false },
+  { month:'Jun', date:'06/30', name:'MOS', version:'V 2.3.0', cat:'ortho', desc:'Custom Stage 추가 및 K-Line 디자인 서비스 추가', subtitle:'US Only', monetized:false, features:['Custom Stage 추가 및 K-Line 디자인 서비스 추가'] },
 
   // JULY
-  { month:'Jul', date:'07/23', name:'Express for iPad', version:'V 1.1.1', cat:'ipadmac', desc:'Express for iPad', monetized:false },
+  { month:'Jul', date:'07/23', name:'Express for iPad', version:'V 1.1.1', cat:'ipadmac', desc:'HD Photo, 사진 촬영 후 첨부, 트리 구조 개선', monetized:false, features:['HD Photo','사진 촬영 후 첨부','트리 구조 개선'] },
 
   // SEPTEMBER
-  { month:'Sep', date:'09/17', name:'Medit Link', version:'V 3.5.0', cat:'platform', desc:'업데이트', monetized:false },
+  { month:'Sep', date:'09/17', name:'Medit Link', version:'V 3.5.0', cat:'platform', desc:'Patient 중심의 데이터 관리, 주문워크플로우 개선', monetized:false, features:['Patient 중심의 데이터 관리','주문워크플로우 개선'] },
   { month:'Sep', date:'09/29', name:'CX Suite', version:'V 1.0.0', cat:'apps',
     desc:'5 New Apps Release: Smile Design for 3D, Face Scanning, Patient Monitoring, AI Smile Video Simulation, Risk Visualization',
     subtitle:'5 New Apps Release',
@@ -702,14 +696,17 @@ const items = [
 
   // OCTOBER
   { month:'Oct', date:'10/21', name:'Medit Link', version:'V 3.5.0', cat:'platform', desc:'업데이트', subtitle:'China', monetized:false },
+  { month:'Oct', date:'10/22', name:'Express', version:'V 1.1.2', cat:'ipadmac', desc:'Face Scan 연동, Smart HD Imaging 탑재', subtitle:'(TBD)', monetized:false, features:['Face Scan 연동','Smart HD Imaging 탑재'] },
 
   // NOVEMBER
-
   { month:'Nov', date:'11/02', name:'Medit Link', version:'V 3.5.1', cat:'platform', desc:'업데이트', monetized:false },
+  { month:'Nov', date:'11/19', name:'Medit Link', version:'V 3.5.x', cat:'enterprise', desc:'Sanitas 요구사항 대응', subtitle:'(TBD)', monetized:false, features:['Sanitas 요구사항 대응 - MFA 구축, EDR / 랜섬웨어 대응 문서화 등'] },
+  { month:'Nov', date:'11/19', name:'Express', version:'V 1.1.2', cat:'ipadmac', desc:'Scan Intelligence, 추가 워크플로우 지원', subtitle:'(TBD)', monetized:false, features:['Scan Intelligence','추가 워크플로우 지원'] },
 
   // DECEMBER
   { month:'Dec', date:'12/02', name:'Medit Link', version:'V 3.5.1', cat:'enterprise', desc:'업데이트', monetized:false },
   { month:'Dec', date:'12/15', name:'Medit Link', version:'V 3.5.1', cat:'enterprise', desc:'업데이트', subtitle:'China', monetized:false },
+  { month:'Dec', date:'12/17', name:'Medit Link', version:'V 3.5.x', cat:'platform', desc:'Payment System 적용, Support Request 채널 변경', subtitle:'<span style="color:#ef4444;font-weight:600;">(China)</span><br>(TBD)', monetized:false, features:['Payment System 적용','Support Request 채널 변경 (Zendesk → Udesk)'] },
 ];
 
 let activeFilters = new Set(['all']);
@@ -720,7 +717,7 @@ function renderTimeline() {
 
   months.forEach((m, mi) => {
     const col = document.createElement('div');
-    col.className = 'month-col' + (m === 'Mar' ? ' current' : '');
+    col.className = 'month-col' + (m === 'Apr' ? ' current' : '');
 
     const label = document.createElement('div');
     label.className = 'month-label';
@@ -849,7 +846,7 @@ function renderWithStatFilter() {
 
   months.forEach((m) => {
     const col = document.createElement('div');
-    col.className = 'month-col' + (m === 'Mar' ? ' current' : '');
+    col.className = 'month-col' + (m === 'Apr' ? ' current' : '');
 
     const label = document.createElement('div');
     label.className = 'month-label';
