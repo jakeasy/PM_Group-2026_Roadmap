@@ -7,30 +7,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f8f9fb;
-    --surface: #ffffff;
-    --surface2: #f1f3f7;
-    --border: #e2e5ec;
-    --text: #1a1d26;
-    --text-dim: #5a6178;
-    --text-muted: #8b92a8;
-    --phase1: #2563eb;
-    --phase1-glow: rgba(37,99,235,0.08);
-    --phase2: #059669;
-    --phase2-glow: rgba(5,150,105,0.08);
-    --phase3: #d97706;
-    --phase3-glow: rgba(217,119,6,0.08);
+    --bg: #1e2330;
+    --surface: #272d3d;
+    --surface2: #2f364a;
+    --border: #3a4259;
+    --text: #e8eaf0;
+    --text-dim: #9ba3b8;
+    --text-muted: #6b7490;
+    --phase1: #3b82f6;
+    --phase1-glow: rgba(59,130,246,0.12);
+    --phase2: #10b981;
+    --phase2-glow: rgba(16,185,129,0.12);
+    --phase3: #f59e0b;
+    --phase3-glow: rgba(245,158,11,0.12);
     --cat-scanner: #3b82f6;
-    --cat-app: #2563eb;
-    --cat-platform: #7c3aed;
+    --cat-app: #60a5fa;
+    --cat-platform: #a78bfa;
     --cat-hardware: #ea580c;
     --cat-clinical: #db2777;
     --cat-partner: #ca8a04;
-    --cat-ortho: #0284c7;
-    --cat-sales: #c026d3;
-    --cat-ipadmac: #16a34a;
-    --cat-enterprise: #ea580c;
-    --cat-mobile: #0891b2;
+    --cat-ortho: #38bdf8;
+    --cat-sales: #e879f9;
+    --cat-ipadmac: #4ade80;
+    --cat-enterprise: #fb923c;
+    --cat-mobile: #22d3ee;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -44,7 +44,7 @@
   }
 
   .noise {
-    position: fixed; inset:0; z-index:0; pointer-events:none; opacity:0.015;
+    position: fixed; inset:0; z-index:0; pointer-events:none; opacity:0.03;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
@@ -83,7 +83,7 @@
     font-weight: 800;
     letter-spacing: -1px;
     margin: 8px 0 6px;
-    background: linear-gradient(135deg, #1a1d26 0%, #3a4058 100%);
+    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -151,7 +151,7 @@
   }
 
   .filter-btn:hover {
-    border-color: #b0b7c8;
+    border-color: #5a6480;
     color: var(--text);
   }
 
@@ -283,12 +283,12 @@
 
   .item-card:hover {
     transform: translateY(-2px);
-    border-color: #c5cad6;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border-color: #4a5270;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   }
 
   .item-card.monetized {
-    border-color: rgba(217,119,6,0.3);
+    border-color: rgba(245,158,11,0.35);
   }
 
   .item-card.monetized::after {
@@ -342,16 +342,16 @@
   }
 
   .item-card[data-cat="scanner"] .card-tag { background:rgba(96,165,250,0.12); color:var(--cat-scanner); }
-  .item-card[data-cat="apps"] .card-tag { background:rgba(37,99,235,0.08); color:var(--cat-app); }
-  .item-card[data-cat="platform"] .card-tag { background:rgba(124,58,237,0.08); color:var(--cat-platform); }
+  .item-card[data-cat="apps"] .card-tag { background:rgba(96,165,250,0.15); color:var(--cat-app); }
+  .item-card[data-cat="platform"] .card-tag { background:rgba(167,139,250,0.15); color:var(--cat-platform); }
   .item-card[data-cat="hardware"] .card-tag { background:rgba(251,146,60,0.12); color:var(--cat-hardware); }
   .item-card[data-cat="apps2"] .card-tag { background:rgba(244,114,182,0.12); color:var(--cat-clinical); }
   .item-card[data-cat="partner"] .card-tag { background:rgba(251,191,36,0.12); color:var(--cat-partner); }
-  .item-card[data-cat="ortho"] .card-tag { background:rgba(2,132,199,0.08); color:var(--cat-ortho); }
-  .item-card[data-cat="sales"] .card-tag { background:rgba(192,38,211,0.08); color:var(--cat-sales); }
-  .item-card[data-cat="ipadmac"] .card-tag { background:rgba(22,163,74,0.08); color:var(--cat-ipadmac); }
-  .item-card[data-cat="enterprise"] .card-tag { background:rgba(234,88,12,0.08); color:var(--cat-enterprise); }
-  .item-card[data-cat="mobile"] .card-tag { background:rgba(8,145,178,0.08); color:var(--cat-mobile); }
+  .item-card[data-cat="ortho"] .card-tag { background:rgba(56,189,248,0.15); color:var(--cat-ortho); }
+  .item-card[data-cat="sales"] .card-tag { background:rgba(232,121,249,0.15); color:var(--cat-sales); }
+  .item-card[data-cat="ipadmac"] .card-tag { background:rgba(74,222,128,0.15); color:var(--cat-ipadmac); }
+  .item-card[data-cat="enterprise"] .card-tag { background:rgba(251,146,60,0.15); color:var(--cat-enterprise); }
+  .item-card[data-cat="mobile"] .card-tag { background:rgba(34,211,238,0.15); color:var(--cat-mobile); }
 
   @keyframes card-in {
     from { opacity:0; transform: translateY(12px); }
@@ -362,7 +362,7 @@
   .modal-overlay {
     display:none;
     position:fixed; inset:0; z-index:100;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.5);
     backdrop-filter: blur(8px);
     align-items:center; justify-content:center;
     animation: fade-in 0.2s ease;
@@ -465,8 +465,8 @@
   .stat-card:nth-child(4) .stat-value { color: var(--cat-app); }
 
   .stat-card.clickable { cursor: pointer; transition: all 0.25s ease; }
-  .stat-card.clickable:hover { border-color: #c5cad6; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-  .stat-card.clickable.active { border-color: var(--phase1); box-shadow: 0 0 16px rgba(37,99,235,0.1); }
+  .stat-card.clickable:hover { border-color: #4a5270; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+  .stat-card.clickable.active { border-color: var(--phase1); box-shadow: 0 0 16px rgba(59,130,246,0.2); }
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
@@ -492,7 +492,7 @@
         <div class="subtitle">SW Monetization &rarr; Extend Apps &rarr; Extend B2B</div>
         <div class="today-badge" style="margin-top:0;">
           <div class="dot"></div>
-          Updated: 2026.03.26
+          Updated: 2026.04.03
         </div>
 
       </div>
@@ -565,7 +565,7 @@ const i18n = {
     logo: 'PRODUCT ROADMAP',
     title: '2026 R&D Release Timeline',
     subtitle: 'SW Monetization → Extend Apps → Extend B2B',
-    updated: 'Updated: 2026.03.26',
+    updated: 'Updated: 2026.04.03',
     totalReleases: 'Total Releases',
     meditLink: 'Medit Link',
     monetized: 'Monetized',
@@ -583,7 +583,7 @@ const i18n = {
     logo: '제품 로드맵',
     title: '2026 R&D 릴리즈 타임라인',
     subtitle: 'SW 수익화 → 앱 확장 수익화 → B2B 확장 수익화',
-    updated: '업데이트: 2026.03.26',
+    updated: '업데이트: 2026.04.03',
     totalReleases: '전체 릴리즈',
     meditLink: 'Medit Link',
     monetized: '수익화',
